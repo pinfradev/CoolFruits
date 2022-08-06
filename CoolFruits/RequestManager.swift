@@ -7,11 +7,13 @@
 
 import Foundation
 
-class RequestManager {
+protocol RequestManagerProvider {
+    func getAllFruts(_ completion: @escaping (([FruitModel?]?, Error?) -> Void))
+}
+
+class RequestManager: RequestManagerProvider {
     var session: URLSession
     var baseURL: String = "https://www.fruityvice.com/api/fruit"
-    
-    public static let shared = RequestManager()
     
     init() {
         self.session = URLSession(configuration: URLSessionConfiguration.default)

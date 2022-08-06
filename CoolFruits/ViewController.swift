@@ -13,8 +13,10 @@ public class HomeViewModel {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var viewModel: HomeViewModel = HomeViewModel()
     @IBOutlet weak var fruitsTableView: UITableView!
+    
+    var viewModel: HomeViewModel = HomeViewModel()
+    var requestManager: RequestManagerProvider = RequestManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationController?.navigationBar.topItem?.title = "Fruitspedia"
         self.navigationController?.navigationBar.tintColor = UIColor.black
         
-        RequestManager.shared.getAllFruts { fruits, error in
+        requestManager.getAllFruts { fruits, error in
             self.viewModel.fruits = fruits
             DispatchQueue.main.async {
                 self.fruitsTableView.reloadData()
