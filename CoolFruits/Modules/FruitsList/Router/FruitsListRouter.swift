@@ -29,10 +29,7 @@ class FruitsListRouter: FruitsListRouterInput {
     }
     
     func routeToFruitsDetail(selectedFruit: FruitModel) {
-        let fruitDetailViewController = FruitDetailViewController()
-        fruitDetailViewController.selectedFruit = selectedFruit
-        
-        fruitDetailViewController.title = selectedFruit.name
+        let fruitDetailViewController = FruitDetailRouter().createModule(selectedFruit: selectedFruit)
         
         view?.navigationController?.pushViewController(fruitDetailViewController, animated: true)
     }

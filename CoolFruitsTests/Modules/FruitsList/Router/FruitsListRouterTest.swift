@@ -43,8 +43,8 @@ class FruitsListRouterTest: QuickSpec {
                 
                 let topViewController = navigationController.topViewController as! FruitDetailViewController
                 
-                expect(topViewController.selectedFruit).notTo(beNil())
                 expect(topViewController.title).to(equal(selectedFruit.name))
+                expect(topViewController.presenter).notTo(beNil())
             }
         }
     }
