@@ -17,7 +17,7 @@ class FruitDetailPresenter: FruitDetailPresenterInput {
     }
     
     func getFruitInformation() {
-        let family = "Family: \(selectedFruit.family ?? ""))"
+        let family = "Family: \(selectedFruit.family ?? "")"
         let genus = "Genus: \(selectedFruit.genus ?? "")"
         let nutrition = getNutritionText(selectedFruit: selectedFruit)
         
