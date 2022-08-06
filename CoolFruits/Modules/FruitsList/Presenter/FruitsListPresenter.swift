@@ -5,7 +5,6 @@
 //  Created by Fray Pineda on 5/8/22.
 //
 
-import Foundation
 import UIKit
 
 class FruitsListPresenter: FruitsListViewOutput {

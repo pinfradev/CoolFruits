@@ -20,23 +20,27 @@ class RequestManager: RequestManagerProvider {
     }
     
     func getAllFruts(_ completion: @escaping (([FruitModel]?, Error?) -> Void)) {
-        session.dataTask(with: URL(string: baseURL + "/all")!) { data, response, error in
-            if error != nil {
-                
+        guard let url = URL(string: baseURL + "/all") else {
+            completion(nil, NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500))
+            return
+        }
+        
+        session.dataTask(with: url) { data, response, error in
+            guard error == nil else {
                 DispatchQueue.main.async {
                     completion(nil, error)
-                    return
                 }
-            } else {
-                do {
-                    let decodedObject = try JSONDecoder().decode([FruitModel].self, from: data!)
-                    DispatchQueue.main.async {
-                        completion(decodedObject, nil)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500))
-                    }
+                return
+            }
+
+            do {
+                let decodedObject = try JSONDecoder().decode([FruitModel].self, from: data!)
+                DispatchQueue.main.async {
+                    completion(decodedObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500))
                 }
             }
         }.resume()
