@@ -18,9 +18,7 @@
 		9D6DC7E7287E1E0300D96A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DC7E5287E1E0300D96A6D /* Main.storyboard */; };
 		9D6DC7E9287E1E0600D96A6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DC7E8287E1E0600D96A6D /* Assets.xcassets */; };
 		9D6DC7EC287E1E0600D96A6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6DC7EA287E1E0600D96A6D /* LaunchScreen.storyboard */; };
-		9DA2B08F288984FD00C8EC03 /* FruitDetailCitrusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA2B08E288984FD00C8EC03 /* FruitDetailCitrusViewController.swift */; };
 		9DA2B0912889850E00C8EC03 /* FruitDetailCitrusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2B0902889850E00C8EC03 /* FruitDetailCitrusViewController.xib */; };
-		9DA2B0932889883E00C8EC03 /* SelectedFruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA2B0922889883E00C8EC03 /* SelectedFruit.swift */; };
 		9DA2B0952889886000C8EC03 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA2B0942889886000C8EC03 /* RequestManager.swift */; };
 		ABC549A0289DAAE800455B10 /* CoolFruitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5499F289DAAE800455B10 /* CoolFruitsTests.swift */; };
 		ABC549B1289DC4E400455B10 /* FruitsListViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC549B0289DC4E400455B10 /* FruitsListViewControllerTest.swift */; };
@@ -71,9 +69,7 @@
 		9D6DC7E8287E1E0600D96A6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D6DC7EB287E1E0600D96A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D6DC7ED287E1E0600D96A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DA2B08E288984FD00C8EC03 /* FruitDetailCitrusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitDetailCitrusViewController.swift; sourceTree = "<group>"; };
 		9DA2B0902889850E00C8EC03 /* FruitDetailCitrusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FruitDetailCitrusViewController.xib; sourceTree = "<group>"; };
-		9DA2B0922889883E00C8EC03 /* SelectedFruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFruit.swift; sourceTree = "<group>"; };
 		9DA2B0942889886000C8EC03 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		ABC5499D289DAAE700455B10 /* CoolFruitsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoolFruitsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC5499F289DAAE800455B10 /* CoolFruitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoolFruitsTests.swift; sourceTree = "<group>"; };
@@ -137,22 +133,21 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		9D15A4352887882E00896AC4 /* Details */ = {
+		9D15A4352887882E00896AC4 /* FruitDetail */ = {
 			isa = PBXGroup;
 			children = (
 				9D15A4362887884300896AC4 /* FruitDetailViewController.swift */,
 				9D15A4382887884F00896AC4 /* FruitDetailViewController.xib */,
-				9DA2B08E288984FD00C8EC03 /* FruitDetailCitrusViewController.swift */,
 				9DA2B0902889850E00C8EC03 /* FruitDetailCitrusViewController.xib */,
 			);
-			path = Details;
+			name = FruitDetail;
+			path = ../FruitDetail;
 			sourceTree = "<group>";
 		};
 		9D15A43A2887895500896AC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				9D15A43B2887896500896AC4 /* FruitModel.swift */,
-				9DA2B0922889883E00C8EC03 /* SelectedFruit.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,7 +178,6 @@
 			children = (
 				ABE8E17F289EBD5C005488AA /* Strings */,
 				ABC549C8289E031700455B10 /* Modules */,
-				9D15A4352887882E00896AC4 /* Details */,
 				9D6DC7DF287E1E0300D96A6D /* AppDelegate.swift */,
 				9D6DC7E1287E1E0300D96A6D /* SceneDelegate.swift */,
 				9D6DC7E5287E1E0300D96A6D /* Main.storyboard */,
@@ -294,6 +288,7 @@
 		ABC549C8289E031700455B10 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				9D15A4352887882E00896AC4 /* FruitDetail */,
 				ABC549C9289E032300455B10 /* FruitsList */,
 			);
 			path = Modules;
@@ -553,7 +548,6 @@
 				ABE8E17C289E99B4005488AA /* FruitsListRouter.swift in Sources */,
 				ABE8E17E289E99D6005488AA /* FruitsListRouterInput.swift in Sources */,
 				9D15A43228877F7600896AC4 /* FruitCell.swift in Sources */,
-				9DA2B0932889883E00C8EC03 /* SelectedFruit.swift in Sources */,
 				ABE8E176289E8D03005488AA /* FruitsListViewOutput.swift in Sources */,
 				ABE8E181289EBD69005488AA /* Strings.swift in Sources */,
 				9D6DC7E4287E1E0300D96A6D /* FruitsListViewController.swift in Sources */,
@@ -566,7 +560,6 @@
 				ABC549CD289E048F00455B10 /* FruitsListPresenter.swift in Sources */,
 				ABE8E188289ECAEF005488AA /* FruitsListInteractorInput.swift in Sources */,
 				9D15A4372887884300896AC4 /* FruitDetailViewController.swift in Sources */,
-				9DA2B08F288984FD00C8EC03 /* FruitDetailCitrusViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

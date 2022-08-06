@@ -9,7 +9,7 @@ import UIKit
 
 class FruitsListRouter: FruitsListRouterInput {
     
-    var view: FruitsListViewController?
+    var view: UIViewController?
     
     func createModule() -> UIViewController {
         if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FruitsListNavigationController") as? UINavigationController, let view = navigationController.children.first as? FruitsListViewController {
@@ -36,25 +36,4 @@ class FruitsListRouter: FruitsListRouterInput {
         
         view?.navigationController?.pushViewController(fruitDetailViewController, animated: true)
     }
-    
-//    if selectedFruit.genus == Strings.FruitsList.citrusGenus {
-//        navigateToCitrusDetail()
-//    } else {
-//        navigateToDetail()
-//    }
-//    func navigateToCitrusDetail() {
-//        let vc = FruitDetailViewController(nibName: "FruitDetailCitrusViewController", bundle: nil)
-//        vc.title = SelectedFruit.fruit?.name
-//        if let view = view as? UIViewController {
-//            view.navigationController?.pushViewController(vc, animated: true)
-//        }
-//    }
-//    
-//    func navigateToDetail() {
-//        let vc = FruitDetailViewController(nibName: "FruitDetailViewController", bundle: nil)
-//        vc.title = SelectedFruit.fruit?.name
-//        if let view = view as? UIViewController {
-//            view.navigationController?.pushViewController(vc, animated: true)
-//        }
-//    }
 }

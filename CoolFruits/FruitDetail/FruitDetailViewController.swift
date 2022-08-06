@@ -1,25 +1,34 @@
 //
-//  FruitDetailCitrusViewController.swift
+//  FruitDetailViewController.swift
 //  CoolFruits
 //
-//  Created by Luis Alejandro Zapata Gonzalez on 21-07-22.
+//  Created by Luis Alejandro Zapata Gonzalez on 19-07-22.
 //
 
+import Foundation
 import UIKit
 
-public class FruitDetailCitrusViewController: UIViewController {
+public class FruitDetailViewController: UIViewController {
     @IBOutlet weak var familyLabel: UILabel!
     @IBOutlet weak var genusLabel: UILabel!
     @IBOutlet weak var nutritionLabel: UILabel!
     
+    var selectedFruit: FruitModel?
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
-        familyLabel.text = "Family: \(SelectedFruit.fruit!.family!)"
-        genusLabel.text = "Genus: \(SelectedFruit.fruit!.genus!)"
-        nutritionLabel.text = getNutritionText(selectedFruit: SelectedFruit.fruit!)
+        if let selectedFruit = selectedFruit {
+            familyLabel.text = "Family: \(selectedFruit.family!)"
+            genusLabel.text = "Genus: \(selectedFruit.genus!)"
+            nutritionLabel.text = getNutritionText(selectedFruit: selectedFruit)
+            
+            if selectedFruit.genus == Strings.FruitsList.citrusGenus {
+                view.backgroundColor = UIColor.systemGreen
+            }
+        }
     }
     
-    
+
     func getNutritionText(selectedFruit: FruitModel) -> String {
         var text = String()
         text += "Sugar: " + String(selectedFruit.nutritions?.sugar ?? 0)
