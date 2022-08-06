@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RequestManagerProvider {
-    func getAllFruts(_ completion: @escaping (([FruitModel?]?, Error?) -> Void))
+    func getAllFruts(_ completion: @escaping (([FruitModel]?, Error?) -> Void))
 }
 
 class RequestManager: RequestManagerProvider {
@@ -19,17 +19,24 @@ class RequestManager: RequestManagerProvider {
         self.session = URLSession(configuration: URLSessionConfiguration.default)
     }
     
-    public func getAllFruts(_ completion: @escaping (([FruitModel?]?, Error?) -> Void)) {
+    func getAllFruts(_ completion: @escaping (([FruitModel]?, Error?) -> Void)) {
         session.dataTask(with: URL(string: baseURL + "/all")!) { data, response, error in
             if error != nil {
-                completion(nil, error)
-                return
+                
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                    return
+                }
             } else {
                 do {
                     let decodedObject = try JSONDecoder().decode([FruitModel].self, from: data!)
-                    completion(decodedObject, nil)
+                    DispatchQueue.main.async {
+                        completion(decodedObject, nil)
+                    }
                 } catch {
-                    completion(nil, NSError())
+                    DispatchQueue.main.async {
+                        completion(nil, NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500))
+                    }
                 }
             }
         }.resume()

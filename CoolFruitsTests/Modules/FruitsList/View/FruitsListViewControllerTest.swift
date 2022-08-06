@@ -15,12 +15,18 @@ class FruitsListViewControllerTest: QuickSpec {
     
     override func spec() {
         
-        var sut: ViewController!
+        var sut: FruitsListViewController!
         var navigationController: NonAnimatableNavigationController!
+        var presenter: FruitsListPresenterMock!
         
         beforeEach {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            sut = storyboard.instantiateViewController(withIdentifier: "FruitsListViewController") as? ViewController
+            presenter = FruitsListPresenterMock()
+            
+            sut = storyboard.instantiateViewController(withIdentifier: "FruitsListViewController") as? FruitsListViewController
+            
+            sut.presenter = presenter
+            
             navigationController = NonAnimatableNavigationController(rootViewController: sut)
             
             _ = sut.view
@@ -28,6 +34,7 @@ class FruitsListViewControllerTest: QuickSpec {
         
         afterEach {
             sut = nil
+            navigationController = nil
         }
         
         describe("A FruitsListViewController") {
@@ -38,6 +45,10 @@ class FruitsListViewControllerTest: QuickSpec {
                     expect(sut.fruitsTableView.delegate).notTo(beNil())
                     expect(sut.fruitsTableView.dataSource).notTo(beNil())
                 }
+                
+                it("Should retrieve fruit List") {
+                    expect(presenter.retrieveFruitsListCount).to(equal(1))
+                }
             }
             
             context("When table has loaded elements ") {
@@ -45,7 +56,7 @@ class FruitsListViewControllerTest: QuickSpec {
                 
                 beforeEach {
                     fruitsList = FruitsListMocks().getFruitsList()
-                    sut.viewModel.fruits = fruitsList
+                    sut.viewModel = fruitsList
                     sut.fruitsTableView.reloadData()
                 }
                 
@@ -82,11 +93,35 @@ class FruitsListViewControllerTest: QuickSpec {
                         tableDelegate?.tableView?(table, didSelectRowAt: IndexPath(row: 0, section: 0))
                         
                         expect(navigationController.topViewController).to(beAKindOf(FruitDetailViewController.self))
-                        
-                        let topViewController = navigationController.topViewController as! FruitDetailViewController
                     }
                 }
             }
+            
+            context("when retrieves list o fruits") {
+                
+                it("Should set viewModel and reload data") {
+                    sut.viewModel = nil
+                    let fruitsList = FruitsListMocks().getFruitsList()
+                    
+                    sut.didRetrieveFruits(fruitsList: fruitsList)
+                    
+                    expect(sut.viewModel?.count).to(equal(3))
+                    expect(sut.fruitsTableView.visibleCells.count).to(equal(3))
+                }
+            }
         }
+    }
+    
+    class FruitsListPresenterMock: FruitsListViewOutput {
+        
+        var retrieveFruitsListCount = 0
+        
+        func retrieveFruitsList() {
+            retrieveFruitsListCount += 1
+        }
+    }
+    
+    class NoAnimationsFruitsListViewController: FruitsListViewController {
+        
     }
 }

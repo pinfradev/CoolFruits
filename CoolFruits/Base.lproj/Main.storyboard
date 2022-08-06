@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Fruits List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoolFruits" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FruitsListViewController" id="BYZ-38-t0r" customClass="FruitsListViewController" customModule="CoolFruits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
         <!--Navigation Controller-->
         <scene sceneID="USC-2s-ac3">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9dV-3f-TTT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FruitsListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9dV-3f-TTT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1kP-95-OGe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

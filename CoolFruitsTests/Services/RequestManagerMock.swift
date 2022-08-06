@@ -22,12 +22,13 @@ class RequestManagerMock: RequestManagerProvider {
         self.responseType = responseType
     }
     
-    func getAllFruts(_ completion: @escaping (([FruitModel?]?, Error?) -> Void)) {
+    func getAllFruts(_ completion: @escaping (([FruitModel]?, Error?) -> Void)) {
         if responseType == .success {
             let fruitsList = FruitsListMocks().getFruitsList()
             completion(fruitsList, nil)
         } else {
-            completion(nil, NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500))
+            let error = NSError(domain: "https://www.fruityvice.com/api/fruit", code: 500, userInfo: [NSLocalizedDescriptionKey: "Ha ocurrido un error, por favor intente mas tarde"])
+            completion(nil, error)
         }
     }
 }
