@@ -13,11 +13,19 @@ public class FruitDetailViewController: UIViewController {
     @IBOutlet weak var genusLabel: UILabel!
     @IBOutlet weak var nutritionLabel: UILabel!
     
+    var selectedFruit: FruitModel?
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
-        familyLabel.text = "Family: \(SelectedFruit.fruit!.family!)"
-        genusLabel.text = "Genus: \(SelectedFruit.fruit!.genus!)"
-        nutritionLabel.text = getNutritionText(selectedFruit: SelectedFruit.fruit!)
+        if let selectedFruit = selectedFruit {
+            familyLabel.text = "Family: \(selectedFruit.family!)"
+            genusLabel.text = "Genus: \(selectedFruit.genus!)"
+            nutritionLabel.text = getNutritionText(selectedFruit: selectedFruit)
+        }
+        
+//        familyLabel.text = "Family: \(SelectedFruit.fruit!.family!)"
+//        genusLabel.text = "Genus: \(SelectedFruit.fruit!.genus!)"
+//        nutritionLabel.text = getNutritionText(selectedFruit: SelectedFruit.fruit!)
     }
     
 

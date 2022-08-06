@@ -8,4 +8,5 @@
 protocol FruitsListViewOutput {
     
     func retrieveFruitsList()
+    func routeToFruitDetail(selectedFruit: FruitModel)
 }

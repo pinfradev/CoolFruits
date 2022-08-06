@@ -30,12 +30,12 @@ class FruitDetailViewControllerTest: QuickSpec {
                 
                 it("Should set fruit infromation") {
                     let fruit = FruitsListMocks().getFruitsList().first
-                    SelectedFruit.fruit = fruit
+                    sut.selectedFruit = fruit
                     _ = sut.view
                     
                     let expectedNutritionInformation = "Sugar: 10.3\nCalories: 52\nFat: 0.4"
-                    let expectedFamily = "Family: \(SelectedFruit.fruit!.family!)"
-                    let expectedGenus = "Genus: \(SelectedFruit.fruit!.genus!)"
+                    let expectedFamily = "Family: \(fruit!.family!)"
+                    let expectedGenus = "Genus: \(fruit!.genus!)"
                     
                     expect(sut.familyLabel.text).to(equal(expectedFamily))
                     expect(sut.genusLabel.text).to(equal(expectedGenus))

@@ -6,22 +6,30 @@
 //
 
 import Foundation
+import UIKit
 
 class FruitsListPresenter: FruitsListViewOutput {
-    
-    var requestManager: RequestManagerProvider = RequestManager()
-    var view: fruitsListViewInput?
+
+    weak var view: fruitsListViewInput?
     var router: FruitsListRouterInput?
+    var interactor: FruitsListInteractorInput?
     
     func retrieveFruitsList() {
-        
-        requestManager.getAllFruts { fruits, error in
-            guard error == nil, let fruits = fruits else {
-                self.view?.didFailtRetrievingFruits(error: error?.localizedDescription ?? "Ha ocurrido un error")
-                return
-            }
-            
-            self.view?.didRetrieveFruits(fruitsList: fruits)
-        }
+        interactor?.retrieveFruitsList()
+    }
+    
+    func routeToFruitDetail(selectedFruit: FruitModel) {
+        router?.routeToFruitsDetail(selectedFruit: selectedFruit)
+    }
+}
+
+extension FruitsListPresenter: FruitsListInteractorOutput {
+    
+    func didRetrieveFruits(fruitsList: [FruitModel]) {
+        view?.didRetrieveFruits(fruitsList: fruitsList)
+    }
+    
+    func didFailRetrievingFruits(error: String) {
+        view?.didFailtRetrievingFruits(error: error)
     }
 }

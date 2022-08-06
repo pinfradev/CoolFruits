@@ -13,8 +13,9 @@ class FruitsListViewController: UIViewController {
     
     var viewModel: [FruitModel]?
     
-    var selectedFruit: FruitModel?
     var presenter: FruitsListViewOutput?
+    
+    let citrusGenus = Strings.FruitsList.citrusGenus
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,26 +26,10 @@ class FruitsListViewController: UIViewController {
         fruitsTableView.register(UINib(nibName: "\(FruitCell.self)", bundle: nil), forCellReuseIdentifier: "\(FruitCell.self)")
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.topItem?.title = "Fruitspedia"
+        navigationController?.navigationBar.topItem?.title = Strings.FruitsList.navigationTitle
         navigationController?.navigationBar.tintColor = UIColor.black
         
         presenter?.retrieveFruitsList()
-    }
-    
-    func navigateToCitrusDetail() {
-        let vc = FruitDetailViewController(nibName: "FruitDetailCitrusViewController", bundle: nil)
-        vc.title = SelectedFruit.fruit?.name
-        if let navigator = navigationController {
-            navigator.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func navigateToDetail() {
-        let vc = FruitDetailViewController(nibName: "FruitDetailViewController", bundle: nil)
-        vc.title = SelectedFruit.fruit?.name
-        if let navigator = navigationController {
-            navigator.pushViewController(vc, animated: true)
-        }
     }
 }
 
@@ -58,18 +43,20 @@ extension FruitsListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(FruitCell.self)", for: indexPath) as! FruitCell
 
-        cell.setUp(fruitName: viewModel?[indexPath.row].name, fruitSugar: viewModel?[indexPath.row].nutritions?.sugar, isCitrus: viewModel?[indexPath.row].genus == "Citrus")
+        cell.setUp(
+            fruitName: viewModel?[indexPath.row].name,
+            fruitSugar: viewModel?[indexPath.row].nutritions?.sugar,
+            isCitrus: viewModel?[indexPath.row].genus == citrusGenus)
         
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SelectedFruit.fruit = viewModel?[indexPath.row]
-        if SelectedFruit.fruit?.genus == "Citrus" {
-            navigateToCitrusDetail()
+        if let selectedFruit = viewModel?[indexPath.row] {
+            presenter?.routeToFruitDetail(selectedFruit: selectedFruit)
         } else {
-            navigateToDetail()
+            showAlert(message: Strings.Alert.genericError)
         }
     }
 }
@@ -77,16 +64,20 @@ extension FruitsListViewController: UITableViewDataSource, UITableViewDelegate {
 extension FruitsListViewController: fruitsListViewInput {
     
     func didFailtRetrievingFruits(error: String) {
-        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Aceptar", style: .default)
-        
-        alertController.addAction(action)
-        
-        present(alertController, animated: true)
+        showAlert(message: error)
     }
     
     func didRetrieveFruits(fruitsList: [FruitModel]) {
         viewModel = fruitsList
         fruitsTableView.reloadData()
+    }
+    
+    private func showAlert(title: String = Strings.Alert.errorTitle, message: String) {
+        let alertController = UIAlertController(title: Strings.Alert.errorTitle, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: Strings.Alert.acceptButtonTitle, style: .default)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true)
     }
 }

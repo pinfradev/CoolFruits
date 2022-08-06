@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  CoolFruits
+
+  Created by Fray Pineda on 6/8/22.
+  
+*/
+
+//MARK: - FruitsList
+
+"fruits_list.navigation_title" = "Fruitspedia";
+"fruits_list.citrus_genus" = "Citrus";
+
+//MARK: - Alert
+
+"alert.accept_button_title" = "Aceptar";
+"alert.error_title" = "Error";
+"alert.generic_error" = "Ha ocurrido un error";
+

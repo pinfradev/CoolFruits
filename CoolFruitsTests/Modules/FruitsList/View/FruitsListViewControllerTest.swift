@@ -16,7 +16,6 @@ class FruitsListViewControllerTest: QuickSpec {
     override func spec() {
         
         var sut: FruitsListViewController!
-        var navigationController: NonAnimatableNavigationController!
         var presenter: FruitsListPresenterMock!
         
         beforeEach {
@@ -27,14 +26,12 @@ class FruitsListViewControllerTest: QuickSpec {
             
             sut.presenter = presenter
             
-            navigationController = NonAnimatableNavigationController(rootViewController: sut)
-            
             _ = sut.view
         }
         
         afterEach {
             sut = nil
-            navigationController = nil
+            presenter = nil
         }
         
         describe("A FruitsListViewController") {
@@ -86,13 +83,16 @@ class FruitsListViewControllerTest: QuickSpec {
                 
                 context("When user selects a cell") {
                     
-                    it("Should navigate to FruitDetailsViewController when user selects non citric fruit") {
+                    beforeEach {
                         let table = sut.fruitsTableView!
                         let tableDelegate = table.delegate
                         
                         tableDelegate?.tableView?(table, didSelectRowAt: IndexPath(row: 0, section: 0))
-                        
-                        expect(navigationController.topViewController).to(beAKindOf(FruitDetailViewController.self))
+                    }
+                    
+                    it("Should call routeToFruitDetail from presenter") {
+                        expect(presenter.routeToFruitDetailCount).to(equal(1))
+                        expect(presenter.selectedFruit).notTo(beNil())
                     }
                 }
             }
@@ -113,15 +113,18 @@ class FruitsListViewControllerTest: QuickSpec {
     }
     
     class FruitsListPresenterMock: FruitsListViewOutput {
-        
+
         var retrieveFruitsListCount = 0
+        var routeToFruitDetailCount = 0
+        var selectedFruit: FruitModel!
         
         func retrieveFruitsList() {
             retrieveFruitsListCount += 1
         }
-    }
-    
-    class NoAnimationsFruitsListViewController: FruitsListViewController {
         
+        func routeToFruitDetail(selectedFruit: FruitModel) {
+            self.selectedFruit = selectedFruit
+            routeToFruitDetailCount += 1
+        }
     }
 }

@@ -10,4 +10,5 @@ import UIKit
 protocol FruitsListRouterInput {
     
     func createModule() -> UIViewController
+    func routeToFruitsDetail(selectedFruit: FruitModel)
 }

@@ -16,72 +16,114 @@ class FruitsListPresenterTest: QuickSpec {
         
         var sut: FruitsListPresenter!
         var view: FruitListViewMock!
+        var interactor: FruitsListInteractorMock!
+        var router: FruitsListRouterMock!
         
         beforeEach {
             sut = FruitsListPresenter()
             view = FruitListViewMock()
+            interactor = FruitsListInteractorMock()
+            router = FruitsListRouterMock()
             
             sut.view = view
+            sut.interactor = interactor
+            sut.router = router
         }
         
         afterEach {
             sut = nil
             view = nil
+            interactor = nil
+            router = nil
         }
         
         describe("A FruitsListPresenter") {
             
             context("When retrieve fruits method in called") {
                 
-                it("Should retrive list of fruits") {
-                    let expectation = QuickSpec.current.expectation(description: "retrieve list of fuits")
-                    let requestManagerMock = RequestManagerMock()
-
-                    sut.requestManager = requestManagerMock
-                    view.expectation = expectation
-                    
+                it("Should retrieve list of fruits from interactor") {
                     sut.retrieveFruitsList()
                     
-                    QuickSpec.current.waitForExpectations(timeout: 5) {_ in
-                        expect(view.didRetrieveFruitsCount).to(equal(1))
-                    }
+                    expect(interactor.retrieveFruitsListCount).to(equal(1))
+                }
+            }
+            
+            context("When it routes to detail view") {
+                
+                it("Should call route to detail method from router") {
+                    let selectedFruit = FruitsListMocks().getFruitsList().first!
+                    
+                    sut.routeToFruitDetail(selectedFruit: selectedFruit)
+                    
+                    expect(router.routeToFruitsDetailCount).to(equal(1))
+                    expect(router.selectedFruit).notTo(beNil())
+                }
+            }
+            
+            context("When it receives fruit list service response") {
+                
+                it("Should call received fruit list method from view") {
+                    let fruitsList = FruitsListMocks().getFruitsList()
+                    
+                    sut.didRetrieveFruits(fruitsList: fruitsList)
+                    
+                    expect(view.didRetrieveFruitsCount).to(equal(1))
+                    expect(view.fruitsList).notTo(beNil())
                 }
                 
-                it("Should fail retrieving fruits") {
-                    let expectation = QuickSpec.current.expectation(description: "retrieve list of fuits")
-                    let requestManagerMock = RequestManagerMock(responseType: .failure)
-
-                    sut.requestManager = requestManagerMock
-                    view.expectation = expectation
+                it("Should call failed receiving fruit list method from view") {
+                    let error = "Ha ocurrido un error"
                     
-                    sut.retrieveFruitsList()
+                    sut.didFailRetrievingFruits(error: error)
                     
-                    QuickSpec.current.waitForExpectations(timeout: 5) {_ in
-                        expect(view.didRetrieveFruitsCount).to(equal(0))
-                        expect(view.didFailtRetrievingFruitsCount).to(equal(1))
-                        expect(view.error).to(equal("Ha ocurrido un error, por favor intente mas tarde"))
-                    }
+                    expect(view.didFailtRetrievingFruitsCount).to(equal(1))
+                    expect(view.error).to(equal(error))
                 }
             }
         }
     }
-    
+        
     class FruitListViewMock: fruitsListViewInput {
         
         var didRetrieveFruitsCount = 0
         var didFailtRetrievingFruitsCount = 0
-        var expectation: XCTestExpectation!
         var error: String!
+        var fruitsList: [FruitModel]!
         
         func didRetrieveFruits(fruitsList: [FruitModel]) {
             didRetrieveFruitsCount += 1
-            expectation.fulfill()
+            self.fruitsList = fruitsList
         }
         
         func didFailtRetrievingFruits(error: String) {
             didFailtRetrievingFruitsCount += 1
             self.error = error
-            expectation.fulfill()
+        }
+    }
+
+    class FruitsListInteractorMock: FruitsListInteractorInput {
+        
+        var retrieveFruitsListCount = 0
+        
+        func retrieveFruitsList() {
+            retrieveFruitsListCount += 1
+        }
+    }
+    
+    class FruitsListRouterMock: FruitsListRouterInput {
+        
+        var routeToFruitsDetailCount = 0
+        var selectedFruit: FruitModel!
+        
+        func createModule() -> UIViewController {
+            return UIViewController()
+        }
+        
+        func routeToFruitsDetail(selectedFruit: FruitModel) {
+            routeToFruitsDetailCount += 1
+            self.selectedFruit = selectedFruit
         }
     }
 }
+    
+    
