@@ -1,6 +1,6 @@
 # CoolFruits
 
-<p>This aplication is about a list of fruits, you can select an item from that list ans see de detailed information.</p>
+<p>This aplication is about a list of fruits, you can select an item from that list and see the detailed information.</p>
 
 <p>To build this iOS app was used VIPER, and for testing Quick and Nimble installed by cocoapods</p>
 
