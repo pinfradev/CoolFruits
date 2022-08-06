@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Fruits List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoolFruits" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FruitsListViewController" id="BYZ-38-t0r" customClass="FruitsListViewController" customModule="CoolFruits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,18 +20,26 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="azZ-2z-ckZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JPv-mn-aOw" secondAttribute="trailing" id="0l0-Pv-9Jr"/>
                             <constraint firstItem="JPv-mn-aOw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TZt-zt-grl"/>
+                            <constraint firstItem="azZ-2z-ckZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WGZ-67-eXi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JPv-mn-aOw" secondAttribute="bottom" id="Yfm-lW-Xtz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="azZ-2z-ckZ" secondAttribute="bottom" id="Z7N-NP-EWG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="azZ-2z-ckZ" secondAttribute="trailing" id="klZ-dD-YQc"/>
                             <constraint firstItem="JPv-mn-aOw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mbD-dJ-v9b"/>
+                            <constraint firstItem="azZ-2z-ckZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sO5-Jg-Aqz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zcL-Bz-ohR"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="azZ-2z-ckZ" id="QkO-Se-Oki"/>
                         <outlet property="fruitsTableView" destination="JPv-mn-aOw" id="721-yh-EoP"/>
                     </connections>
                 </viewController>
@@ -42,7 +50,7 @@
         <!--Navigation Controller-->
         <scene sceneID="USC-2s-ac3">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9dV-3f-TTT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FruitsListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9dV-3f-TTT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1kP-95-OGe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
