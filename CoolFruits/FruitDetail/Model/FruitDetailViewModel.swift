@@ -9,5 +9,5 @@ struct FruitDetailViewModel {
     
     let family: String
     let genus: String
-    let nutition: String
+    let nutrition: String
 }

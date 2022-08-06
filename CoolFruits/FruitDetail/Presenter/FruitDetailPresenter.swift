@@ -24,7 +24,7 @@ class FruitDetailPresenter: FruitDetailPresenterInput {
         let viewModel = FruitDetailViewModel(
             family: family,
             genus: genus,
-            nutition: nutrition)
+            nutrition: nutrition)
         
         view?.didGetFruitInformation(viewModel: viewModel)
     }

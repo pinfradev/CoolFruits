@@ -54,7 +54,7 @@ class FruitDetailViewControllerTest: QuickSpec {
                     let viewModel = FruitDetailViewModel(
                         family: "Family: Rosaceae",
                         genus: "Genus: Malus",
-                        nutition: "Sugar: 10.3\nCalories: 52\nFat: 0.4")
+                        nutrition: "Sugar: 10.3\nCalories: 52\nFat: 0.4")
                     
                     sut.didGetFruitInformation(viewModel: viewModel)
                     

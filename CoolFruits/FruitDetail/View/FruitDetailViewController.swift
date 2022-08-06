@@ -31,6 +31,6 @@ extension FruitDetailViewController: FruitDetailPresenterOutput {
     func didGetFruitInformation(viewModel: FruitDetailViewModel) {
         familyLabel.text = viewModel.family
         genusLabel.text = viewModel.genus
-        nutritionLabel.text = viewModel.nutition
+        nutritionLabel.text = viewModel.nutrition
     }
 }
