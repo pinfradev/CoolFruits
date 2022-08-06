@@ -9,4 +9,6 @@ protocol fruitsListViewInput: AnyObject {
     
     func didRetrieveFruits(fruitsList: [FruitModel])
     func didFailtRetrievingFruits(error: String)
+    func showLoader()
+    func hideLoder()
 }

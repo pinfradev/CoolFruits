@@ -45,6 +45,7 @@ class FruitsListPresenterTest: QuickSpec {
                     sut.retrieveFruitsList()
                     
                     expect(interactor.retrieveFruitsListCount).to(equal(1))
+                    expect(view.showLoaderCount).to(equal(1))
                 }
             }
             
@@ -69,6 +70,7 @@ class FruitsListPresenterTest: QuickSpec {
                     
                     expect(view.didRetrieveFruitsCount).to(equal(1))
                     expect(view.fruitsList).notTo(beNil())
+                    expect(view.hideLoaderCount).to(equal(1))
                 }
                 
                 it("Should call failed receiving fruit list method from view") {
@@ -78,6 +80,7 @@ class FruitsListPresenterTest: QuickSpec {
                     
                     expect(view.didFailtRetrievingFruitsCount).to(equal(1))
                     expect(view.error).to(equal(error))
+                    expect(view.hideLoaderCount).to(equal(1))
                 }
             }
         }
@@ -87,6 +90,8 @@ class FruitsListPresenterTest: QuickSpec {
         
         var didRetrieveFruitsCount = 0
         var didFailtRetrievingFruitsCount = 0
+        var showLoaderCount = 0
+        var hideLoaderCount = 0
         var error: String!
         var fruitsList: [FruitModel]!
         
@@ -98,6 +103,15 @@ class FruitsListPresenterTest: QuickSpec {
         func didFailtRetrievingFruits(error: String) {
             didFailtRetrievingFruitsCount += 1
             self.error = error
+        }
+        
+        
+        func showLoader() {
+            showLoaderCount += 1
+        }
+        
+        func hideLoder() {
+            hideLoaderCount += 1
         }
     }
 

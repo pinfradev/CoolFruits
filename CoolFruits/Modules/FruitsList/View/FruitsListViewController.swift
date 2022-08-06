@@ -10,6 +10,7 @@ import UIKit
 class FruitsListViewController: UIViewController {
     
     @IBOutlet weak var fruitsTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var viewModel: [FruitModel]?
     
@@ -63,6 +64,14 @@ extension FruitsListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension FruitsListViewController: fruitsListViewInput {
     
+    func showLoader() {
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoder() {
+        activityIndicator.stopAnimating()
+    }
+
     func didFailtRetrievingFruits(error: String) {
         showAlert(message: error)
     }

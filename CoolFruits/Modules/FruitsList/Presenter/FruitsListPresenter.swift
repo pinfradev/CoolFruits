@@ -15,6 +15,7 @@ class FruitsListPresenter: FruitsListViewOutput {
     var interactor: FruitsListInteractorInput?
     
     func retrieveFruitsList() {
+        view?.showLoader()
         interactor?.retrieveFruitsList()
     }
     
@@ -26,10 +27,12 @@ class FruitsListPresenter: FruitsListViewOutput {
 extension FruitsListPresenter: FruitsListInteractorOutput {
     
     func didRetrieveFruits(fruitsList: [FruitModel]) {
+        view?.hideLoder()
         view?.didRetrieveFruits(fruitsList: fruitsList)
     }
     
     func didFailRetrievingFruits(error: String) {
+        view?.hideLoder()
         view?.didFailtRetrievingFruits(error: error)
     }
 }

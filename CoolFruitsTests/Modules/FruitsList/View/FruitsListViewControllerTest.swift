@@ -36,6 +36,24 @@ class FruitsListViewControllerTest: QuickSpec {
         
         describe("A FruitsListViewController") {
             
+            it("Should hide loader") {
+                sut.activityIndicator.startAnimating()
+                
+                sut.hideLoder()
+                
+                expect(sut.activityIndicator.isAnimating).to(beFalse())
+                expect(sut.activityIndicator.isHidden).to(beTrue())
+            }
+            
+            it("Should show loader") {
+                sut.activityIndicator.stopAnimating()
+                
+                sut.showLoader()
+                
+                expect(sut.activityIndicator.isAnimating).to(beTrue())
+                expect(sut.activityIndicator.isHidden).to(beFalse())
+            }
+            
             context("When view is loaded") {
                 
                 it("Should assign delegate and datasource for table") {
